@@ -8,6 +8,7 @@
       "@consts/*": ["consts/*"],
       "@hooks/*": ["hooks/*"],
       "@store/*": ["store/*"],
+      "@utils/*": ["utils/*"],
     }
   }
 }
