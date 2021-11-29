@@ -5,13 +5,9 @@ export type TListItem = {
   productId: string
 };
 
-export type TListState = {
-  listItems: TListItem[]
-};
+export type TListState = TListItem[];
 
-const initialState: TListState = {
-  listItems: []
-};
+const initialState: TListState = [];
 
 const reducerList = (state: TListState = initialState, action: TAction) => {
   switch (action.type) {
@@ -20,14 +16,14 @@ const reducerList = (state: TListState = initialState, action: TAction) => {
     }
     case ActionTypes.ADD_ITEM_TO_LIST: {
       const newListItem: TListItem = action.payload;
-      return {...state, shoppingList: [...state.listItems, newListItem]};
+      return [...state, newListItem];
     }
     case ActionTypes.REMOVE_ITEM_FROM_LIST: {
       const listItemId = action.payload;
-      return {...state, shoppingList: state.listItems.filter(listItem => listItem.id !== listItemId)};
+      return [...state.filter(item => item.id !== listItemId)];
     }
     default:
-      return {...state};
+      return [...state];
   }
 };
 

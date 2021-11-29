@@ -5,17 +5,13 @@ export type TProduct = {
   name: string,
   priceValue: number,
   priceUnits: string,
-  photoUrl: string
+  dataPhoto: string, // base64 img
   description?: string
 };
 
-export type TProductsState = {
-  products: TProduct[]
-};
+export type TProductsState = TProduct[];
 
-const initialState: TProductsState = {
-  products: [] // TODO: add default products
-};
+const initialState: TProductsState = [];
 
 const reducerProducts = (state: TProductsState = initialState, action: TAction) => {
   switch (action.type) {
@@ -24,10 +20,14 @@ const reducerProducts = (state: TProductsState = initialState, action: TAction) 
     }
     case ActionTypes.CREATE_PRODUCT: {
       const newProduct: TProduct = action.payload;
-      return {...state, products: [...state.products, newProduct]};
+      return [...state, newProduct];
+    }
+    case ActionTypes.DELETE_PRODUCT: {
+      const productId: string = action.payload;
+      return [...state.filter(product => product.id !== productId)];
     }
     default:
-      return {...state};
+      return [...state];
   }
 };
 

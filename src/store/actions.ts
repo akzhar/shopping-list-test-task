@@ -1,6 +1,5 @@
 import getNewID from '@utils/getNewID';
 
-import { TState } from '@store/reducer';
 import { TProduct } from '@store/reducerProducts';
 import { TListItem } from '@store/reducerList';
 import { TCartItem } from '@store/reducerCart';
@@ -21,7 +20,7 @@ export enum ActionTypes {
   HIDE_MESSAGE = 'hide message',
   // products
   RESET_PRODUCTS = 'reset products',
-  // DELETE_PRODUCT = 'delete product'
+  DELETE_PRODUCT = 'delete product',
   CREATE_PRODUCT = 'create product',
   // shopping list
   RESET_LIST = 'reset product list',
@@ -29,20 +28,25 @@ export enum ActionTypes {
   ADD_ITEM_TO_LIST = 'add item to list',
   // cart
   RESET_CART = 'reset cart',
-  // REMOVE_ITEM_FROM_CART = 'remove item from cart'
+  REMOVE_ITEM_FROM_CART = 'remove item from cart',
   ADD_ITEM_TO_CART = 'add item to cart',
+}
+
+interface ISetWarningMessage {
+  label: string,
+  text?: string
 }
 
 interface ICreateProduct {
   productName: string,
   productPrice: number,
-  productPhotoUrl: string,
+  productPhotoData: string,
   productDescription?: string
 }
 
-// interface IDeleteProduct {
-//   productId: string
-// }
+interface IDeleteProduct {
+  productId: string
+}
 
 interface IAddItemToList {
   productId: string
@@ -53,44 +57,54 @@ interface IRemoveItemFromList {
 }
 
 interface IAddItemToCart {
-  listItemId: string
+  productId: string
 }
 
-// interface IRemoveItemFromCart {
-//   cartItemId: string
-// }
+interface IRemoveItemFromCart {
+  cartItemId: string
+}
 
 const ActionCreator = {
   reset: () => {
-    return (dispatch: (action: TAction) => VoidFunction, getState: () => TState) => {
+    return (dispatch: (action: TAction) => void) => {
       dispatch({ type: ActionTypes.RESET_MESSAGE});
       dispatch({ type: ActionTypes.RESET_PRODUCTS});
       dispatch({ type: ActionTypes.RESET_LIST});
       dispatch({ type: ActionTypes.RESET_CART});
     }
   },
-  set404WarningMessage: () => {
+  setInfoMessage: ({ label, text }: ISetWarningMessage) => {
     return (dispatch: (action: TAction) => void) => {
-      const label = 'Код ошибки 404:';
-      const text = 'Запрошенный ресурс не был найден...';
-      dispatch({ type: ActionTypes.SET_WARNING_MESSAGE, payload: { label, text } });
+      dispatch({ type: ActionTypes.SET_INFO_MESSAGE, payload: { label, text } });
       dispatch({ type: ActionTypes.SHOW_MESSAGE});
+      setTimeout(() => {
+        dispatch({ type: ActionTypes.RESET_MESSAGE});
+      }, 1500);
     }
   },
-  createProduct: ({ productName, productPrice, productPhotoUrl, productDescription }: ICreateProduct): TAction => {
+  setWarningMessage: ({ label, text }: ISetWarningMessage) => {
+    return (dispatch: (action: TAction) => void) => {
+      dispatch({ type: ActionTypes.SET_WARNING_MESSAGE, payload: { label, text } });
+      dispatch({ type: ActionTypes.SHOW_MESSAGE});
+      setTimeout(() => {
+        dispatch({ type: ActionTypes.RESET_MESSAGE});
+      }, 1500);
+    }
+  },
+  createProduct: ({ productName, productPrice, productPhotoData, productDescription }: ICreateProduct): TAction => {
     const newProduct: TProduct = {
       id: getNewID(),
       name: productName,
       priceValue: productPrice,
       priceUnits: DEFAULT_PRICE_UNITS,
-      photoUrl: productPhotoUrl,
+      dataPhoto: productPhotoData,
       description: productDescription
     };
     return { type: ActionTypes.CREATE_PRODUCT, payload: newProduct };
   },
-  // deleteProduct: ({ productId }: IDeleteProduct): TAction => {
-  //   return { type: ActionTypes.DELETE_PRODUCT, payload: productId };
-  // },
+  deleteProduct: ({ productId }: IDeleteProduct): TAction => {
+    return { type: ActionTypes.DELETE_PRODUCT, payload: productId };
+  },
   addItemToList: ({ productId }: IAddItemToList): TAction => {
     const newListItem: TListItem = {
       id: getNewID(),
@@ -99,18 +113,18 @@ const ActionCreator = {
     return { type: ActionTypes.ADD_ITEM_TO_LIST, payload: newListItem };
   },
   removeItemFromList: ({ listItemId }: IRemoveItemFromList): TAction => {
-    return { type: ActionTypes.ADD_ITEM_TO_LIST, payload: listItemId };
+    return { type: ActionTypes.REMOVE_ITEM_FROM_LIST, payload: listItemId };
   },
-  addItemToCart: ({ listItemId }: IAddItemToCart): TAction => {
+  addItemToCart: ({ productId }: IAddItemToCart): TAction => {
     const newCartItem: TCartItem = {
       id: getNewID(),
-      listItemId
+      productId
     };
     return { type: ActionTypes.ADD_ITEM_TO_CART, payload: newCartItem };
+  },
+  removeItemFromCart: ({ cartItemId }: IRemoveItemFromCart): TAction => {
+    return { type: ActionTypes.REMOVE_ITEM_FROM_CART, payload: cartItemId };
   }
-  // removeItemFromCart: ({ cartItemId }: IRemoveItemFromCart): TAction => {
-  //   return { type: ActionTypes.REMOVE_ITEM_FROM_CART, payload: cartItemId };
-  // }
 };
 
 export default ActionCreator;

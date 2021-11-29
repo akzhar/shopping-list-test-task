@@ -7,14 +7,14 @@ import reducerProducts, { TProductsState } from '@store/reducerProducts';
 
 export type TState = {
   cart: TCartState,
-  list: TListState,
+  shoppingList: TListState,
   message: TMessageState,
   products: TProductsState
 };
 
 const reducer = combineReducers({
   cart: reducerCart,
-  list: reducerList,
+  shoppingList: reducerList,
   message: reducerMessage,
   products: reducerProducts
 });

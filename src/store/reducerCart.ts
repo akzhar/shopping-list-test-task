@@ -2,16 +2,12 @@ import { ActionTypes, TAction } from '@store/actions';
 
 export type TCartItem = {
   id: string,
-  listItemId: string
+  productId: string
 };
 
-export type TCartState = {
-  cartItems: TCartItem[]
-};
+export type TCartState = TCartItem[];
 
-const initialState: TCartState = {
-  cartItems: []
-};
+const initialState: TCartState = [];
 
 const reducerCart = (state: TCartState = initialState, action: TAction) => {
   switch (action.type) {
@@ -20,14 +16,14 @@ const reducerCart = (state: TCartState = initialState, action: TAction) => {
     }
     case ActionTypes.ADD_ITEM_TO_CART: {
       const newCartItem: TCartItem = action.payload;
-      return {...state, cartItems: [...state.cartItems, newCartItem]};
+      return [...state, newCartItem];
     }
-    // case ActionTypes.REMOVE_ITEM_FROM_CART: {
-    //   const cartItemId = action.payload;
-    //   return {...state, cartItems: state.cartItems.filter(cartItem => cartItem.id !== cartItemId)};
-    // }
+    case ActionTypes.REMOVE_ITEM_FROM_CART: {
+      const cartItemId = action.payload;
+      return [...state.filter(cartItem => cartItem.id !== cartItemId)];
+    }
     default:
-      return {...state};
+      return [...state];
   }
 };
 
