@@ -1,0 +1,32 @@
+.new-product-form
+  margin-bottom: 20px
+
+  & fieldset
+    padding: 0
+    border: none
+
+  &__wrapper
+    display: flex
+    justify-content: space-between
+    align-items: center
+    flex-wrap: wrap
+
+  &__question
+    margin-bottom: 20px
+
+  &__input
+    display: block
+    box-sizing: border-box
+    width: 100%
+    padding: 14px 20px
+    font-size: 1rem
+    font-weight: 500
+    border: 1px solid transparent
+    border-radius: 6px
+    +shadow($color-app-shadow)
+
+    &:hover
+      border-color: $color-input-border
+
+    &::placeholder
+      color: $color-input-placeholder
