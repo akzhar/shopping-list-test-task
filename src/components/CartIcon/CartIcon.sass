@@ -1,0 +1,28 @@
+.cart-icon
+  width: 30px
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+
+  &__counter
+    position: absolute
+    top: -6px
+    right: -10px
+    width: 18px
+    height: 18px
+    background-color: $color-button-back
+    border-radius: 50%
+    font-size: 0.6rem
+    line-height: 18px
+    text-align: center
+    color: $color-button-text
+
+  &:hover
+    opacity: 0.8
+
+  &:active
+    transform: translateY(2px)
+    opacity: 0.6
+    transition: 0s
+
