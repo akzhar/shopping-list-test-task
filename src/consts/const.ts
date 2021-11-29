@@ -1,5 +1,9 @@
 export const AppRoutes = {
-  HOME: '/'
+  HOME: '/',
+  LIST: '/list',
+  PRODUCTS: '/products',
+  NEW_PRODUCT: '/new-product',
+  CART: '/cart'
 };
 
 export const DEFAULT_PRICE_UNITS = '$';

@@ -9,10 +9,20 @@ const NotFoundPage: React.FC = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(ActionCreator.set404WarningMessage());
+    dispatch(ActionCreator.setWarningMessage(
+      {
+        label: 'Код ошибки 404:',
+        text: 'Запрошенный ресурс не был найден...'
+      }
+    ));
   });
 
-  return <Message />
+  return (
+    <>
+      <Message />
+      Несуществующая страница
+    </>
+  )
 };
 
 export default NotFoundPage;
