@@ -1,0 +1,53 @@
+.input-photo
+  margin-bottom: 20px
+
+  &__dropzone
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-right: 20px
+
+    &--dragged-over
+      opacity: 0.6
+
+      & label
+        color: $color-app-text-second
+
+  &__image
+    position: relative
+    min-width: 82px
+    height: 82px
+    margin-right: 20px
+    border: 2px solid rgba(255, 255, 255, 0.6)
+    border-radius: 50%
+    overflow: hidden
+    +shadow($color-app-shadow)
+
+    & img
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      width: 100%
+
+  &__upload
+      display: flex
+      flex-direction: column
+      justify-content: center
+
+      & label
+        font-size: 14px
+        text-align: center
+        text-decoration: underline
+
+        &:hover
+          color: $color-app-text-second
+          opacity: 0.6
+
+      & input[type="file"]
+        +hide()
+
+        &:focus + label[for="photo"],
+        & input[type="file"] + label[for="photo"]:active
+          color: app_color_brand
+          opacity: 0.6

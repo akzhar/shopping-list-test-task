@@ -7,3 +7,5 @@ export const AppRoutes = {
 };
 
 export const DEFAULT_PRICE_UNITS = '$';
+
+export const VALID_PHOTO_EXTENSIONS = ['png', 'jpg', 'jpeg'];
