@@ -1,0 +1,27 @@
+@import ./consts/const.sass
+@import ./mixin.sass
+
+@font-face
+  font-family: 'Proxima Nova '
+  font-display: swap
+  src: url('./assets/fonts/Proxima Nova.woff2') format('woff2')
+  src: url('./assets/fonts/Proxima Nova.woff') format('woff')
+
+html, body
+  margin: 0
+  font-family: 'Proxima Nova', Arial, sans-serif
+  font-weight: 400
+  font-size: 16px
+  line-height: 32px
+  color: $color-app-text
+
+img
+  max-width: 100%
+
+.visually-hidden
+  +hide()
+
+@import ./components/Layout/Layout.sass
+@import ./components/Button/Button.sass
+@import ./components/Message/Message.sass
+

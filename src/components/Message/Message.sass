@@ -1,0 +1,15 @@
+.message
+  position: absolute
+  top: 40px
+  right: 40px
+  padding: 20px
+  border-radius: 4px
+  background-color: $color-message-back
+  color: $color-message-text
+  z-index: 2
+  +shadow($color-app-shadow)
+  +animation-slide-in-left()
+
+  &--warning
+    background-color: $color-message-warning-back
+    color: $color-message-warning-text

@@ -16,7 +16,7 @@ module.exports = {
         rules: [
           {test: /\.js$/, exclude: /node_modules/, use: 'babel-loader'},
           {test: /\.tsx?$/, exclude: /node_modules/, use: 'ts-loader'},
-          {test: /\.styl$/i, use: [ MiniCssExtractPlugin.loader, 'css-loader', 'stylus-loader']},
+          {test: /\.sass$/i, use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']},
           {test: /\.(png|jpe?g|svg)$/i, use: 'file-loader'},
           {test: /\.(woff|woff2|eot|ttf|otf)$/i, use: 'file-loader'},
         ]

@@ -9,7 +9,7 @@ import reducer, { TState } from '@store/reducer';
 
 import App from './App';
 
-import './index.styl';
+import './index.sass';
 
 const store: Store<TState> = createStore(
   reducer,
