@@ -2,14 +2,14 @@ import React from 'react';
 
 type TButtonProps = {
   text: string,
-  buttonClickHandler: () => void,
+  clickHandler?: () => void,
   isAnimate?: boolean
 }
 
-const Button: React.FC<TButtonProps> = ({ text, buttonClickHandler, isAnimate = false}: TButtonProps) => (
+const Button: React.FC<TButtonProps> = ({ text, clickHandler = () => undefined, isAnimate = false}: TButtonProps) => (
   <button
     className={isAnimate ? 'button button--animate' : 'button'}
-    onClick={buttonClickHandler}
+    onClick={clickHandler}
   >
       {text}
   </button>
