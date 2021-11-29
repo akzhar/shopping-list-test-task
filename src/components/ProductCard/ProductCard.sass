@@ -1,0 +1,37 @@
+.product
+
+  &__wrapper
+    display: flex
+    align-items: center
+    flex-wrap: wrap
+    margin-bottom: 20px
+
+  &__photo
+    position: relative
+    min-width: 82px
+    height: 82px
+    margin: 0 30px 20px 0
+    border: 2px solid rgba(255, 255, 255, 0.6)
+    border-radius: 50%
+    overflow: hidden
+    +shadow($color-app-shadow)
+
+    & img
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      width: 100%
+
+  &__name
+    margin: 0 0 10px 0
+
+  &__price
+    margin: 0 0 10px 0
+
+    &-value
+      margin-right: 10px
+      font-size: 26px
+
+  &__description
+    margin: 0
